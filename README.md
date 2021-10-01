@@ -10,7 +10,7 @@
 * Open a browser and type http://localhost:8080/swagger-ui/ for swagger UI
   
   [Link to Swagger UI](http://localhost:8080/swagger-ui/)
-* 
+
 
 ## To Run tests
 
