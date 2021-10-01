@@ -1,0 +1,14 @@
+
+# About APP
+
+info:
+  app:
+    name: Fizz Buzz App Spring Boot
+    description: Fizz Buzz App Spring Boot
+
+
+fizz:
+  buzz:
+    start-limit: 1
+    end-limit: 100
+    sequence-type: SIMPLE
