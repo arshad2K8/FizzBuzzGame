@@ -1,5 +1,12 @@
 package com.game.fun.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.MapperFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import com.game.fun.config.FizzBuzzInputConfig;
 import com.game.fun.domain.FizzBuzzGameResult;
 import com.game.fun.domain.FizzBuzzInputRequest;
@@ -50,5 +57,22 @@ public class FizzBuzzServiceTest {
         Assertions.assertEquals(SequenceStrategy.SIMPLE, fizzBuzzGameResult.getSequenceStrategy());
         Assertions.assertEquals("V1", fizzBuzzGameResult.getGameVersion());
         verify(sequenceGenerator).getSequence(fizzBuzzInputRequest);
+    }
+
+    @Test
+    public void test() throws JsonProcessingException {
+
+        FizzBuzzInputRequest fizzBuzzInputRequest = FizzBuzzInputRequest.builder().gameVersion("V1")
+                .startLimit(1).endLimit(4).sequenceStrategy(SequenceStrategy.SIMPLE).build();
+        ObjectMapper mapper = new ObjectMapper();
+        mapper
+                .registerModule(new ParameterNamesModule())
+                .registerModule(new Jdk8Module())
+                .registerModule(new JavaTimeModule());
+        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        mapper.enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS);
+
+        String serialized = mapper.writeValueAsString(fizzBuzzInputRequest);
+        System.out.println(serialized);
     }
 }
