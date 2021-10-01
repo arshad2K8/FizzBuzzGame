@@ -12,6 +12,13 @@
   [Link to Swagger UI](http://localhost:8080/swagger-ui/)
 * 
 
+## To Run tests
+
+```
+cd ~/FizzBuzzGame
+./mvnw verify
+```
+
 # Tech Stack
 * Spring Boot Web
 
